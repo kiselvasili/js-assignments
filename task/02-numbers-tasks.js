@@ -143,7 +143,9 @@ function getLastDigit(value) {
  * '-525.5'     => -525.5
  */
 function parseNumberFromString(value) {
-    throw new Error('Not implemented');
+    //return value;
+    return parseFloat(value);
+
 }
 
 /**
