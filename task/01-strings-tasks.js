@@ -54,7 +54,7 @@ function getStringLength(value) {
  *   'Chuck','Norris'  => 'Hello, Chuck Norris!'
  */
 function getStringFromTemplate(firstName, lastName) {
-    return 'Hello, '+firstName+' '+lastName+'!';
+    return `Hello, ${firstName} ${lastName}!`;
 }
 
 /**
@@ -277,7 +277,7 @@ function encodeToRot13(str) {
  *   isString(new String('test')) => true
  */
 function isString(value) {
-    throw new Error('Not implemented');
+    return typeof value=="string" || value instanceof String;
 }
 
 
