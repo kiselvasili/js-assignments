@@ -54,7 +54,7 @@ function getStringLength(value) {
  *   'Chuck','Norris'  => 'Hello, Chuck Norris!'
  */
 function getStringFromTemplate(firstName, lastName) {
-    throw new Error('Not implemented');
+    return 'Hello, '+firstName+' '+lastName+'!';
 }
 
 /**
@@ -68,7 +68,7 @@ function getStringFromTemplate(firstName, lastName) {
  *   'Hello, Chuck Norris!' => 'Chuck Norris'
  */
 function extractNameFromTemplate(value) {
-    throw new Error('Not implemented');
+    return value.replace('Hello, ','').replace('!','');
 }
 
 
@@ -83,7 +83,7 @@ function extractNameFromTemplate(value) {
  *   'cat'       => 'c'
  */
 function getFirstChar(value) {
-    throw new Error('Not implemented');
+    return value.slice(0,1);
 }
 
 /**
@@ -113,7 +113,12 @@ function removeLeadingAndTrailingWhitespaces(value) {
  *   'cat', 3 => 'catcatcat'
  */
 function repeatString(value, count) {
-    throw new Error('Not implemented');
+    var result='';
+    for (var i=0;i<count;i++)
+    {
+        result=result+value;
+    }
+    return result;
 }
 
 /**
@@ -129,7 +134,7 @@ function repeatString(value, count) {
  *   'ABABAB','BA' => 'ABAB'
  */
 function removeFirstOccurrences(str, value) {
-    throw new Error('Not implemented');
+    return str.replace(value,'');
 }
 
 /**
@@ -144,7 +149,7 @@ function removeFirstOccurrences(str, value) {
  *   '<a>' => 'a'
  */
 function unbracketTag(str) {
-    throw new Error('Not implemented');
+    return str.slice(1,str.length-1);
 }
 
 
@@ -173,7 +178,7 @@ function convertToUpperCase(str) {
  *   'info@gmail.com' => ['info@gmail.com']
  */
 function extractEmails(str) {
-    throw new Error('Not implemented');
+    return str.split(';');
 }
 
 /**
@@ -200,7 +205,40 @@ function extractEmails(str) {
  *
  */
 function getRectangleString(width, height) {
-    throw new Error('Not implemented');
+    function topSide(width)
+    {
+        var result='';
+        for (var i=0;i<width-2;i++)
+        {
+            result=result+'─';
+        }
+        return '┌'+result+'┐\n';
+    }
+    function bottomSide(width)
+    {
+        var result='';
+        for (var i=0;i<width-2;i++)
+        {
+            result=result+'─';
+        }
+        return '└'+result+'┘\n';
+    }
+    function otherSide(width, height)
+    {
+        var result='';
+        for (var i=0;i<width-2;i++)
+        {
+            result=result+' ';
+        }
+        result='│'+result+'│\n';
+        var value='';
+        for (var j=0;j<height-2;j++)
+        {
+            value=value+result;
+        }
+        return value;
+    }
+    return topSide(width)+otherSide(width, height)+bottomSide(width);
 }
 
 
@@ -220,7 +258,9 @@ function getRectangleString(width, height) {
  *
  */
 function encodeToRot13(str) {
-    throw new Error('Not implemented');
+    return str.replace(/[a-zA-Z]/g,function(c){
+        return String.fromCharCode((c<="Z"?90:122)>=(c=c.charCodeAt(0)+13)?c:c-26);
+    });
 }
 
 /**
@@ -266,7 +306,57 @@ function isString(value) {
  *   'K♠' => 51
  */
 function getCardId(value) {
-    throw new Error('Not implemented');
+    var card;
+    var suit;
+    var cardFound;
+    var suitFound;
+    if (value.length==3)
+    {
+        cardFound=value[0]+value[1];
+        suitFound=value[2];
+    }
+    else {
+        cardFound=value[0];
+        suitFound=value[1];
+    }
+    if ((cardFound>=2) && (cardFound<=10))
+    {
+        card=parseFloat(cardFound);
+    }
+    switch (cardFound)
+    {
+       /* case ((cardFound>=2) && (cardFound<=10)):
+            card=parseFloat(cardFound);
+            break;*/
+        case 'A':
+            card=1;
+            break;
+        case 'J':
+            card=11;
+            break;
+        case 'Q':
+            card=12;
+            break;
+        case 'K':
+            card=13;
+            break;
+    }
+    switch (suitFound)
+    {
+        case '♣':
+            suit=0;
+            break;
+        case '♦':
+            suit=13;
+            break;
+        case '♥':
+            suit=26;
+            break;
+        case '♠':
+            suit=39;
+            break;
+    }
+    return card+suit-1;
 }
 
 

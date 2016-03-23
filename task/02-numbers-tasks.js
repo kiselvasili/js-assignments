@@ -73,7 +73,13 @@ function getAverage(value1, value2) {
  *   (-5,0) (10,-10) => 18.027756377319946
  */
 function getDistanceBetweenPoints(x1, y1, x2, y2) {
-    throw new Error('Not implemented');
+    function katetLength(x1,x2)
+    {
+        return ((x1>0 && x2<0) || (x1<0 && x2>0))? Math.abs(x1)+Math.abs(x2) : Math.abs(x1)-Math.abs(x2);
+    }
+    var a=katetLength(x1,x2);
+    var b=katetLength(y1,y2);
+    return Math.sqrt(Math.pow(a,2)+Math.pow(b,2));
 }
 
 /**
@@ -89,7 +95,20 @@ function getDistanceBetweenPoints(x1, y1, x2, y2) {
  *   5*x = 0         => 0
  */
 function getLinearEquationRoot(a, b) {
-    throw new Error('Not implemented');
+    if (Math.abs(a)==0 || Math.abs(b)==0)
+    {
+        return 0;
+    }
+    if (Math.abs(a)>=Math.abs(b))
+    {
+        return -a/b;
+    }
+    else {
+        if (Math.abs(a)<=Math.abs(b))
+        {
+            return -b/a
+        }
+    }
 }
 
 
@@ -127,7 +146,7 @@ function getAngleBetweenVectors(x1, y1, x2, y2) {
  *     0     => 0
  */
 function getLastDigit(value) {
-    throw new Error('Not implemented');
+    return value%10;
 }
 
 
@@ -183,7 +202,9 @@ function getParallelipidedDiagonal(a,b,c) {
  *   1678, 3  => 1000
  */
 function roundToPowerOfTen(num, pow) {
-    throw new Error('Not implemented');
+    var power = Math.pow(10,pow);
+    var fraction = num/power;
+    return (((fraction%1)*10>=5)?Math.ceil(fraction):Math.floor(fraction))*power;
 }
 
 /**
@@ -204,7 +225,19 @@ function roundToPowerOfTen(num, pow) {
  *   17 => false
  */
 function isPrime(n) {
-    throw new Error('Not implemented');
+    var count=0;
+    for (var i=1;i<=n;i++)
+    {
+        if (n/i%1==0)
+        {count++}
+    }
+    if (count==2)
+    {
+        return true;
+    }
+    else {
+        return false;
+    }
 }
 
 /**
@@ -223,7 +256,21 @@ function isPrime(n) {
  *   toNumber(new Number(42), 0) => 42
  */
 function toNumber(value, def) {
-    throw new Error('Not implemented');
+    var result=value;
+    if(Number(value)>0){
+        return Number(value);
+    }
+    if (result instanceof Number)
+    {
+        return Number(result);
+    }
+    if ((typeof value)==typeof 12)
+    {
+        return parseFloat(value);
+    }
+    else {
+        return parseFloat(def);
+    }
 }
 
 module.exports = {
