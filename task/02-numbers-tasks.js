@@ -22,7 +22,7 @@
  *   5, 5  => 25
  */
 function getRectangleArea(width, height) {
-    return width*height;
+    return width * height;
 }
 
 
@@ -38,7 +38,7 @@ function getRectangleArea(width, height) {
  *   0    => 0
  */
 function getCicleCircumference(radius) {
-    return 2*Math.PI*radius;
+    return 2 * Math.PI * radius;
 }
 
 /**
@@ -54,7 +54,7 @@ function getCicleCircumference(radius) {
  *  -3, 3  => 0
  */
 function getAverage(value1, value2) {
-    throw new Error('Not implemented');
+    return value1/2+value2/2;
 }
 
 /**
@@ -73,13 +73,13 @@ function getAverage(value1, value2) {
  *   (-5,0) (10,-10) => 18.027756377319946
  */
 function getDistanceBetweenPoints(x1, y1, x2, y2) {
-    function katetLength(x1,x2)
-    {
-        return ((x1>0 && x2<0) || (x1<0 && x2>0))? Math.abs(x1)+Math.abs(x2) : Math.abs(x1)-Math.abs(x2);
+    function katetLength(x1, x2) {
+        return ((x1 > 0 && x2 < 0) || (x1 < 0 && x2 > 0)) ? Math.abs(x1) + Math.abs(x2) : Math.abs(x1) - Math.abs(x2);
     }
-    var a=katetLength(x1,x2);
-    var b=katetLength(y1,y2);
-    return Math.sqrt(Math.pow(a,2)+Math.pow(b,2));
+
+    var a = katetLength(x1, x2);
+    var b = katetLength(y1, y2);
+    return Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2));
 }
 
 /**
@@ -95,18 +95,15 @@ function getDistanceBetweenPoints(x1, y1, x2, y2) {
  *   5*x = 0         => 0
  */
 function getLinearEquationRoot(a, b) {
-    if (Math.abs(a)==0 || Math.abs(b)==0)
-    {
+    if (Math.abs(a) == 0 || Math.abs(b) == 0) {
         return 0;
     }
-    if (Math.abs(a)>=Math.abs(b))
-    {
-        return -a/b;
+    if (Math.abs(a) >= Math.abs(b)) {
+        return -a / b;
     }
     else {
-        if (Math.abs(a)<=Math.abs(b))
-        {
-            return -b/a
+        if (Math.abs(a) <= Math.abs(b)) {
+            return -b / a
         }
     }
 }
@@ -146,7 +143,7 @@ function getAngleBetweenVectors(x1, y1, x2, y2) {
  *     0     => 0
  */
 function getLastDigit(value) {
-    return value%10;
+    return value % 10;
 }
 
 
@@ -180,8 +177,8 @@ function parseNumberFromString(value) {
  *   3,3,3   => 5.196152422706632
  *   1,2,3   => 3.741657386773941
  */
-function getParallelipidedDiagonal(a,b,c) {
-    return Math.sqrt(Math.pow(a,2)+Math.pow(b,2)+Math.pow(c,2))
+function getParallelipidedDiagonal(a, b, c) {
+    return Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2) + Math.pow(c, 2))
 }
 
 /**
@@ -190,7 +187,7 @@ function getParallelipidedDiagonal(a,b,c) {
  * @param {number} num
  * @param {number} pow
  * @return {number}
- *  
+ *
  * @example:
  *   1234, 0  => 1234
  *   1234, 1  => 1230
@@ -199,12 +196,12 @@ function getParallelipidedDiagonal(a,b,c) {
  *   1678, 0  => 1678
  *   1678, 1  => 1680
  *   1678, 2  => 1700
- *   1678, 3  => 1000
+ *   1678, 3  => 2000
  */
 function roundToPowerOfTen(num, pow) {
-    var power = Math.pow(10,pow);
-    var fraction = num/power;
-    return (((fraction%1)*10>=5)?Math.ceil(fraction):Math.floor(fraction))*power;
+    var power = Math.pow(10, pow);
+    var fraction = num / power;
+    return (((fraction % 1) * 10 >= 5) ? Math.ceil(fraction) : Math.floor(fraction)) * power;
 }
 
 /**
@@ -212,8 +209,8 @@ function roundToPowerOfTen(num, pow) {
  * See: https://en.wikipedia.org/wiki/Primality_test
  *
  * @param {number} n
- * @return {bool}
- * 
+ * @return {boolean}
+ *
  * @example:
  *   4 => false
  *   5 => true
@@ -225,19 +222,13 @@ function roundToPowerOfTen(num, pow) {
  *   17 => false
  */
 function isPrime(n) {
-    var count=0;
-    for (var i=1;i<=n;i++)
-    {
-        if (n/i%1==0)
-        {count++}
+    var count = 0;
+    for (var i = 1; i <= n; i++) {
+        if (n / i % 1 == 0) {
+            count++
+        }
     }
-    if (count==2)
-    {
-        return true;
-    }
-    else {
-        return false;
-    }
+    return count === 2;
 }
 
 /**
@@ -256,21 +247,22 @@ function isPrime(n) {
  *   toNumber(new Number(42), 0) => 42
  */
 function toNumber(value, def) {
-    var result=value;
-    if(Number(value)>0){
-        return Number(value);
-    }
-    if (result instanceof Number)
-    {
-        return Number(result);
-    }
-    if ((typeof value)==typeof 12)
-    {
-        return parseFloat(value);
-    }
-    else {
-        return parseFloat(def);
-    }
+    return +value || def;
+    /*var result=value;
+     if(Number(value)>0){
+     return Number(value);
+     }
+     if (result instanceof Number)
+     {
+     return Number(result);
+     }
+     if ((typeof value)==typeof 12)
+     {
+     return parseFloat(value);
+     }
+     else {
+     return parseFloat(def);
+     }*/
 }
 
 module.exports = {
