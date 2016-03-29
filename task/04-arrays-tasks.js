@@ -40,9 +40,7 @@ function findElement(arr, value) {
  *    5 => [ 1, 3, 5, 7, 9 ]
  */
 function generateOdds(len) {
-    /*var a=-1;
-     return (new Array(len)).map(()=>a+=2);*/
-    throw new Error('Not implemented');
+    return Array(len).fill(0).map((e, i)=>i + i + 1);
 }
 
 
@@ -74,7 +72,7 @@ function doubleArray(arr) {
  *    [] => []
  */
 function getArrayOfPositives(arr) {
-    return arr.filter((x) => (x>0));
+    return arr.filter((x) => (x > 0));
 }
 
 function integerValue(value) {
@@ -252,8 +250,8 @@ function toArrayOfSquares(arr) {
  *   [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ] => [ 1, 3, 6, 10, 15, 21, 28, 36, 45, 55 ]
  */
 function getMovingSum(arr) {
-    //return arr.map((x)=>())
-    throw new Error('Not implemented');
+    //return arr.map((x,i)=>(i===0)?(x):(x+arr[i-1]));
+    return arr.map((x, i)=>(arr.slice(0, i + 1).reduce((a, b)=>(a + b))));
 }
 
 /**
@@ -268,7 +266,7 @@ function getMovingSum(arr) {
  * [ "a" ] => []
  */
 function getSecondItems(arr) {
-    return arr.fiiter((a,b)=>(b%2===0));
+    return arr.filter((x,i) => (i % 2 != 0));
 }
 
 
@@ -287,7 +285,7 @@ function getSecondItems(arr) {
  *  [ 1,2,3,4,5 ] => [ 1, 2,2, 3,3,3, 4,4,4,4, 5,5,5,5,5 ]
  */
 function propagateItemsByPositionIndex(arr) {
-    throw new Error('Not implemented');
+    return arr.reduce((a, b, i) => a.concat(Array(i + 1).fill(b)), []);
 }
 
 
@@ -341,7 +339,8 @@ function getPositivesCount(arr) {
  *   [ 'one','one','one','zero' ]     => [ 'zero','one','one','one' ]
  */
 function sortDigitNamesByNumericOrder(arr) {
-    throw new Error('Not implemented');
+    var baseArray = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
+    return arr.sort((a, b)=>(baseArray.indexOf(a) > baseArray.indexOf(b)));
 }
 
 /**
@@ -357,7 +356,7 @@ function sortDigitNamesByNumericOrder(arr) {
  *   [ 1, 10, 100, 1000 ]  => 1111
  */
 function getItemsSum(arr) {
-    return arr.reduce((a,b)=>a+b, 0);
+    return arr.reduce((a, b)=>a + b, 0);
 }
 
 /**
@@ -375,8 +374,7 @@ function getItemsSum(arr) {
 function getFalsyValuesCount(arr) {
     return arr.filter(trueValue).length;
 }
-function trueValue(value)
-{
+function trueValue(value) {
     return !value
 }
 
@@ -395,7 +393,7 @@ function trueValue(value)
  *    [ true, 0, 1, 'true' ], true => 1
  */
 function findAllOccurences(arr, item) {
-    return arr.filter((x)=>(x===item)).length;
+    return arr.filter((x)=>(x === item)).length;
 }
 
 /**
@@ -439,14 +437,14 @@ function toStringList(arr) {
  *      { country: 'Russia',  city: 'Saint Petersburg' }
  */
 function sortCitiesArray(arr) {
-    return arr.sort((a, b)=>(a.country+a.city)>(b.country+b.city));
+    return arr.sort((a, b)=>(a.country + a.city) > (b.country + b.city));
 }
 
 /**
  * Creates an indentity matrix of the specified size
  *
  * @param {number} n
- * @return {array}
+ * @return {Array}
  *
  * @example
  *     1  => [[1]]
@@ -461,7 +459,7 @@ function sortCitiesArray(arr) {
  *           [0,0,0,0,1]]
  */
 function getIdentityMatrix(n) {
-    throw new Error('Not implemented');
+    return Array(n).fill(Array(n).fill(0)).map((x, i) => x.map((y, j) => (i === j) ? y = 1 : y = 0));
 }
 
 /**
@@ -478,6 +476,11 @@ function getIdentityMatrix(n) {
  *     3, 3   => [ 3 ]
  */
 function getIntervalArray(start, end) {
+    /*var newArray = (start <= 0 && end > 0 ? Array(Math.abs(start) + Math.abs(end) + 1) : Array(start - end +1))
+     return newArray.map((x,i)=>);*/
+    /*var startArray=Array(Math.abs(start)).fill(0).map((x,i)=>(end+i));
+     var endArray=Array()
+     return start>=0 ? Array(Math.abs(start)).fill(0).map((x,i)=>(end+i)): ;*/
     throw new Error('Not implemented');
 }
 
@@ -493,7 +496,7 @@ function getIntervalArray(start, end) {
  *   [ 1, 1, 2, 2, 3, 3, 4, 4] => [ 1, 2, 3, 4]
  */
 function distinct(arr) {
-    throw new Error('Not implemented');
+    return arr.filter((x, i) => (arr.indexOf(x) === i));
 }
 
 /**
@@ -583,7 +586,9 @@ function getElementByIndexes(arr, indexes) {
  *
  */
 function swapHeadAndTail(arr) {
-    throw new Error('Not implemented');
+    return arr.length % 2 === 0 ?
+        arr.slice(arr.length / 2, arr.length).concat(arr.slice(0, arr.length / 2)) :
+        arr.slice(Math.ceil(arr.length / 2), arr.length).concat(arr.slice(Math.ceil(arr.length / 2) - 1, Math.ceil(arr.length / 2))).concat(arr.slice(0, arr.length / 2));
 }
 
 
