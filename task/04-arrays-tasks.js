@@ -266,7 +266,7 @@ function getMovingSum(arr) {
  * [ "a" ] => []
  */
 function getSecondItems(arr) {
-    return arr.filter((x,i) => (i % 2 != 0));
+    return arr.filter((x, i) => (i % 2 != 0));
 }
 
 
@@ -476,12 +476,7 @@ function getIdentityMatrix(n) {
  *     3, 3   => [ 3 ]
  */
 function getIntervalArray(start, end) {
-    /*var newArray = (start <= 0 && end > 0 ? Array(Math.abs(start) + Math.abs(end) + 1) : Array(start - end +1))
-     return newArray.map((x,i)=>);*/
-    /*var startArray=Array(Math.abs(start)).fill(0).map((x,i)=>(end+i));
-     var endArray=Array()
-     return start>=0 ? Array(Math.abs(start)).fill(0).map((x,i)=>(end+i)): ;*/
-    throw new Error('Not implemented');
+    return Array(end-start+1).fill(0).map((x,i)=>(start+i));
 }
 
 /**
