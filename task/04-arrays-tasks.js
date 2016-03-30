@@ -548,8 +548,8 @@ function selectMany(arr, childrenSelector) {
 /**
  * Returns an element from the multidimentional array by the specified indexes.
  *
- * @param {array} arr
- * @param {array} indexes
+ * @param {Array} arr
+ * @param {Array} indexes
  * @return {any} element from array
  *
  * @example
@@ -558,7 +558,9 @@ function selectMany(arr, childrenSelector) {
  *   [[[ 1, 2, 3]]], [ 0, 0, 1 ]      => 2        (arr[0][0][1])
  */
 function getElementByIndexes(arr, indexes) {
-    throw new Error('Not implemented');
+
+    indexes.unshift(arr);
+    return indexes.reduce((a,b,i)=>a[b]);
 }
 
 
