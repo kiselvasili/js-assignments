@@ -372,7 +372,7 @@ function getItemsSum(arr) {
  *  [ null, undefined, NaN, false, 0, '' ]  => 6
  */
 function getFalsyValuesCount(arr) {
-    return arr.filter(trueValue).length;
+    return arr.filter((x)=> (!x)).length;
 }
 function trueValue(value) {
     return !value
@@ -476,7 +476,7 @@ function getIdentityMatrix(n) {
  *     3, 3   => [ 3 ]
  */
 function getIntervalArray(start, end) {
-    return Array(end-start+1).fill(0).map((x,i)=>(start+i));
+    return Array(end - start + 1).fill(0).map((x, i)=>(start + i));
 }
 
 /**
@@ -532,16 +532,16 @@ function group(array, keySelector, valueSelector) {
 /**
  * Projects each element of the specified array to a sequence and flattens the resulting sequences into one array.
  *
- * @param {array} arr
+ * @param {Array} arr
  * @param {Function} childrenSelector, a transform function to apply to each element that returns an array of children
- * @return {array}
+ * @return {Array}
  *
  * @example
  *   [[1, 2], [3, 4], [5, 6]], (x) => x     =>   [ 1, 2, 3, 4, 5, 6 ]
  *   ['one','two','three'], x=>x.split('')  =>   ['o','n','e','t','w','o','t','h','r','e','e']
  */
 function selectMany(arr, childrenSelector) {
-    throw new Error('Not implemented');
+    return arr.map(childrenSelector).reduce((a, b) => a.concat(b));
 }
 
 
