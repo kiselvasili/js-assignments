@@ -30,7 +30,22 @@
  *
  */
 function getFizzBuzz(num) {
-    throw new Error('Not implemented');
+    if (num % (3 * 5) === 0) {
+        return 'FizzBuzz';
+    }
+    else {
+        if (num % 3 === 0) {
+            return 'Fizz';
+        }
+        else {
+            if (num % 5 === 0) {
+                return 'Buzz';
+            }
+            else {
+                return num;
+            }
+        }
+    }
 }
 
 
@@ -46,7 +61,10 @@ function getFizzBuzz(num) {
  *   10 => 3628800
  */
 function getFactorial(n) {
-    throw new Error('Not implemented');
+    return factorial(n);
+}
+function factorial(n) {
+    return n < 2 ? 1 : n * factorial(n - 1);
 }
 
 
@@ -63,7 +81,10 @@ function getFactorial(n) {
  *   -1,1  =>  0  ( = -1 + 0 + 1 )
  */
 function getSumBetweenNumbers(n1, n2) {
-    throw new Error('Not implemented');
+    return sumInterval(n1, n2);
+}
+function sumInterval(n1, n2) {
+    return n1 === n2 ? n1 : n1 + sumInterval(n1 + 1, n2);
 }
 
 
@@ -81,29 +102,31 @@ function getSumBetweenNumbers(n1, n2) {
  *   10,1,1   =>  false
  *   10,10,10 =>  true
  */
-function isTriangle(a,b,c) {
-    throw new Error('Not implemented');
+function isTriangle(a, b, c) {
+    var maxValue = Math.max(a, b, c);
+    var sum = a + b + c;
+    return maxValue < sum - maxValue;
 }
 
 
 /**
  * Returns true, if two specified axis-aligned rectangles overlap, otherwise false.
- * Each rectangle representing by object 
+ * Each rectangle representing by object
  *  {
  *     top: 5,
  *     left: 5,
  *     width: 20,
  *     height: 10
  *  }
- * 
+ *
  *  (5;5)
- *     -------------  
- *     |           | 
+ *     -------------
+ *     |           |
  *     |           |  height = 10
- *     ------------- 
- *        width=20    
- * 
- * 
+ *     -------------
+ *        width=20
+ *
+ *
  * @param {object} rect1
  * @param {object} rect2
  * @return {bool}
@@ -111,19 +134,22 @@ function isTriangle(a,b,c) {
  * @example:
  *   { top: 0, left: 0, width: 10, height: 10 },
  *   { top: 5, left: 5, width: 20, height: 20 }    =>  true
- * 
+ *
  *   { top: 0, left: 0, width: 10, height: 10 },
  *   { top:20, left:20, width: 20, height: 20 }    =>  false
- *  
+ *
  */
 function doRectanglesOverlap(rect1, rect2) {
     throw new Error('Not implemented');
+}
+function rectangleOverlap() {
+
 }
 
 
 /**
  * Returns true, if point lies inside the circle, otherwise false.
- * Circle is an object of 
+ * Circle is an object of
  *  {
  *     center: {
  *       x: 5,       
@@ -131,24 +157,24 @@ function doRectanglesOverlap(rect1, rect2) {
  *     },        
  *     radius: 20
  *  }
- * 
- * Point is object of 
+ *
+ * Point is object of
  *  {
  *     x: 5,
  *     y: 5
  *  }
- * 
+ *
  * @param {object} circle
  * @param {object} point
- * @return {bool}
+ * @return {boolean}
  *
  * @example:
  *   { center: { x:0, y:0 }, radius:10 },  { x:0, y:0 }     => true
  *   { center: { x:0, y:0 }, radius:10 },  { x:10, y:10 }   => false
- *   
+ *
  */
 function isInsideCircle(circle, point) {
-    throw new Error('Not implemented');
+    return Math.pow((point.x - circle.center.x), 2) + Math.pow((point.y - circle.center.y), 2) < Math.pow(circle.radius, 2);
 }
 
 
@@ -207,7 +233,7 @@ function getIntervalString(a, b, isStartIncluded, isEndIncluded) {
  * 'noon' => 'noon'
  */
 function reverseString(str) {
-    throw new Error('Not implemented');
+    return str.split('').reverse().join('');
 }
 
 
@@ -224,6 +250,14 @@ function reverseString(str) {
  *   34143 => 34143
  */
 function reverseInteger(num) {
+    var result=0;
+    while (num>0)
+    {
+        result*=10;
+        result+=num%10;
+        num/=10;
+    }
+    //return result;
     throw new Error('Not implemented');
 }
 
@@ -441,15 +475,15 @@ module.exports = {
     doRectanglesOverlap: doRectanglesOverlap,
     isInsideCircle: isInsideCircle,
     findFirstSingleChar: findFirstSingleChar,
-    getIntervalString : getIntervalString,
+    getIntervalString: getIntervalString,
     reverseString: reverseString,
     reverseInteger: reverseInteger,
     isCreditCardNumber: isCreditCardNumber,
     getDigitalRoot: getDigitalRoot,
     isBracketsBalanced: isBracketsBalanced,
-    timespanToHumanString : timespanToHumanString,
+    timespanToHumanString: timespanToHumanString,
     toNaryString: toNaryString,
     getCommonDirectoryPath: getCommonDirectoryPath,
     getMatrixProduct: getMatrixProduct,
-    evaluateTicTacToePosition : evaluateTicTacToePosition
+    evaluateTicTacToePosition: evaluateTicTacToePosition
 };
