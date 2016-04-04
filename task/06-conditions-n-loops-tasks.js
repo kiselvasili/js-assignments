@@ -216,7 +216,25 @@ function findFirstSingleChar(str) {
  *
  */
 function getIntervalString(a, b, isStartIncluded, isEndIncluded) {
-    throw new Error('Not implemented');
+    return a < b ? intervalString(a, b, isStartIncluded, isEndIncluded) : intervalString(b, a, isStartIncluded, isEndIncluded);
+}
+function intervalString(a, b, start, end) {
+    if (start && end) {
+        return `[${a}, ${b}]`;
+    }
+    else {
+        if (!start && !end) {
+            return `(${a}, ${b})`;
+        }
+        else {
+            if (start && !end) {
+                return `[${a}, ${b})`;
+            }
+            else {
+                return `(${a}, ${b}]`;
+            }
+        }
+    }
 }
 
 
@@ -250,15 +268,7 @@ function reverseString(str) {
  *   34143 => 34143
  */
 function reverseInteger(num) {
-    var result=0;
-    while (num>0)
-    {
-        result*=10;
-        result+=num%10;
-        num/=10;
-    }
-    //return result;
-    throw new Error('Not implemented');
+    return Number(num.toString().split('').reverse().join(''));
 }
 
 
@@ -283,7 +293,14 @@ function reverseInteger(num) {
  *   4916123456789012 => false
  */
 function isCreditCardNumber(ccn) {
-    throw new Error('Not implemented');
+    var arr = ccn.toString().split('').map((x) => (Number(x)));
+    return arrMod(arr).reduce((a, b) => (a + b)) % 10 === 0;
+}
+function arrMod(arr) {
+    return arr.length % 2 === 0 ? arr.map((x, i) => (i % 2 === 0 ? cnnNumber(x) : x)) : arr.map((x, i)=>(i % 2 !== 0 ? cnnNumber(x) : x));
+}
+function cnnNumber(x) {
+    return x * 2 > 9 ? x * 2 - 9 : x * 2;
 }
 
 
