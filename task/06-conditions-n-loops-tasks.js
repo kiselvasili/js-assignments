@@ -190,7 +190,13 @@ function isInsideCircle(circle, point) {
  *   'entente' => null
  */
 function findFirstSingleChar(str) {
-    throw new Error('Not implemented');
+    var arr = str.split('');
+    for (var i = 0; i < arr.length; i++) {
+        if (arr.filter((x) => (x === arr[i])).length === 1) {
+            return arr[i];
+            break;
+        }
+    }
 }
 
 
@@ -319,7 +325,14 @@ function cnnNumber(x) {
  *   165536 (1+6+5+5+3+6 = 26,  2+6 = 8) => 8
  */
 function getDigitalRoot(num) {
-    throw new Error('Not implemented');
+    return digitSum(num);
+}
+function digitSum(num) {
+    var arr = num.toString().split('').map((x) => (Number(x)));
+    if (arr.length > 2) {
+        return digitSum(arr.reduce((a, b)=>(a + b)))
+    }
+    return arr.reduce((a, b)=>(a + b));
 }
 
 
@@ -345,7 +358,23 @@ function getDigitalRoot(num) {
  *   '{[(<{[]}>)]}' = true 
  */
 function isBracketsBalanced(str) {
-    throw new Error('Not implemented');
+    var flag = true;
+    var lengthStart = str.length;
+    if (str.length === 0) {
+        return true;
+    }
+    while (flag) {
+        str = str.replace('[]', '').replace('()', '').replace('{}', '').replace('<>', '');
+        if (lengthStart > str.length) {
+            if (str.length === 0) {
+                return flag;
+            }
+            lengthStart = str.length;
+        }
+        else {
+            return false;
+        }
+    }
 }
 
 
@@ -405,14 +434,19 @@ function timespanToHumanString(startDate, endDate) {
  *    365, 10 => '365'
  */
 function toNaryString(num, n) {
-    throw new Error('Not implemented');
+    var result = '';
+    while (num > 0) {
+        result = result.concat((num % n).toString())
+        num = Math.floor(num / n);
+    }
+    return result.split('').reverse().join('');
 }
 
 
 /**
  * Returns the commom directory path for specified array of full filenames.
  *
- * @param {array} pathes
+ * @param {Array} pathes
  * @return {string}
  *
  * @example:
@@ -422,7 +456,21 @@ function toNaryString(num, n) {
  *   ['/web/favicon.ico', '/web-scripts/dump', '/webalizer/logs'] => '/'
  */
 function getCommonDirectoryPath(pathes) {
-    throw new Error('Not implemented');
+    var arr = pathes.map((x) => (x.split('/')));
+    var result = '';
+    var firstCycle = arr.map((x) => (x.length)).reduce((a, b) => (a >= b ? b : a));
+    for (var i = 0; i < firstCycle; i++) {
+       var flag = true;
+        for (var j = 1; j < arr.length; j++) {
+            if (arr[0][i] !== arr[j][i]) {
+                flag = false;
+            }
+        }
+        if (flag) {
+            result = result.concat(arr[0][i] + '/');
+        }
+    }
+    return result;
 }
 
 
@@ -430,9 +478,9 @@ function getCommonDirectoryPath(pathes) {
  * Returns the product of two specified matrixes.
  * See details: https://en.wikipedia.org/wiki/Matrix_multiplication
  *
- * @param {array} m1
- * @param {array} m2
- * @return {array}
+ * @param {Array} m1
+ * @param {Array} m2
+ * @return {Array}
  *
  * @example:
  *   [[ 1, 0, 0 ],       [[ 1, 2, 3 ],           [[ 1, 2, 3 ],
@@ -445,7 +493,22 @@ function getCommonDirectoryPath(pathes) {
  *
  */
 function getMatrixProduct(m1, m2) {
-    throw new Error('Not implemented');
+    var rowsM1 = m1.length,
+        rowsM2 = m2.length,
+        colsM2 = m2[0].length,
+        result = Array.from( { length: rowsM1 }, x => [] );
+
+    for (var c_m2 = 0; c_m2 < colsM2; c_m2++) {
+        for (var r_m1 = 0; r_m1 < rowsM1; r_m1++) {
+            var temp = 0;
+            for (var r_m2 = 0; r_m2 < rowsM2; r_m2++) {
+                temp += m1[r_m1][r_m2]*m2[r_m2][c_m2];
+            }
+            result[r_m1][c_m2] = temp;
+        }
+    }
+
+    return result;
 }
 
 
@@ -457,7 +520,7 @@ function getMatrixProduct(m1, m2) {
  * Function should return who is winner in the current position according to the game rules.
  * The result can be: 'X','0',undefined
  *
- * @param {array} position
+ * @param {Array} position
  * @return {string}
  *
  * @example

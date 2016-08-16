@@ -106,7 +106,7 @@ function getRegexForSSN() {
  *  - Valid passwords will only be alphanumeric characters.
  *
  * @param {number} minLength
- * @return {Regex}
+ * @return {RegExp}
  *
  * @example
  *   let validator = getPasswordValidator(6);
@@ -117,7 +117,11 @@ function getRegexForSSN() {
  *   'Pa55'.match(validator) => false
  */
 function getPasswordValidator(minLength) {
-   throw new Error('Not implemented');
+    //return new RegExp(`^(?=\d)(?=[a-z]+)(?=[A-Z]+){${minLength},}$`, 'm');
+    //return new RegExp(`^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{${minLength},}$`);
+    //return /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{minLength,}$/m;
+    //return /[a-zA-Z0-9]+/;
+    return new RegExp (`(?=^.{${minLength},}$)(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?!.*[_])(?!.*[\\s]).*$`);
 }
 
 

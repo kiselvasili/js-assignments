@@ -23,8 +23,6 @@
  */
 function parseDataFromRfc2822(value) {
     return Date.parse(value);
-    //return new Date(value);
-    //throw new Error('Not implemented');
 }
 
 /**
@@ -40,7 +38,6 @@ function parseDataFromRfc2822(value) {
  */
 function parseDataFromIso8601(value) {
     return new Date(Date.parse(value));
-    //throw new Error('Not implemented');
 }
 
 
@@ -80,13 +77,8 @@ function isLeapYear(date) {
  *    Date(2000,1,1,10,0,0),  Date(2000,1,1,15,20,10,453)   => "05:20:10.453"
  */
 function timeSpanToString(startDate, endDate) {
-    var resultDate = new Date(new Date(1970, 1, 1, 0,0,0,0).setMilliseconds(endDate - startDate));
-    return [resultDate.getHours(), resultDate.getMinutes(), resultDate.getSeconds()].map((n) => pad(n, 9)).join(':') + '.' + pad(resultDate.getMilliseconds(), 99)*10;
-}
-
-function pad(number, max) {
-    //return number>max ?number : '0'.repeat(max.toString().length-number.toString().length+1)+number;
-    throw new Error('Not implemented');
+    var timeSpan = new Date(endDate - startDate).toISOString();
+    return `${timeSpan.slice(11, -11)}:${timeSpan.slice(14, -8)}:${timeSpan.slice(17, -5)}.${timeSpan.slice(20, -1)}`;
 }
 
 
@@ -104,18 +96,11 @@ function pad(number, max) {
  *    Date.UTC(2016,3,5,21, 0) => Math.PI/2
  */
 function angleBetweenClockHands(date) {
-    /*var hourTime=new Date(date).getHours();
-    while(hourTime>=6)
-    {
-        hourTime=hourTime-6;
-    }
-    var angle=hourTime/6;
-    if (angle>1)
-    {
-        angle=angle-1;
-    }
-    return Math.PI*angle;*/
-    throw new Error('Not implemented');
+    var newDate = new Date(+date + date.getTimezoneOffset() * 60 * 1000);
+    var hours = newDate.getHours() % 12;
+    var min = newDate.getMinutes();
+    var angle = Math.abs((Math.PI / 360) * (60 * hours - 11 * min));
+    return angle > Math.PI ? (Math.PI * 2 - angle) : angle;
 }
 
 

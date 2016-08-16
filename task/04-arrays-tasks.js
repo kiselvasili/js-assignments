@@ -13,7 +13,7 @@
 /**
  * Returns an index of the specified element in array or -1 if element is not found
  *
- * @param {array} arr
+ * @param {Array} arr
  * @param {any} value
  * @return {number}
  *
@@ -32,7 +32,7 @@ function findElement(arr, value) {
  * Generates an array of odd numbers of the specified length
  *
  * @param {number} len
- * @return {array}
+ * @return {Array}
  *
  * @example
  *    1 => [ 1 ]
@@ -40,15 +40,15 @@ function findElement(arr, value) {
  *    5 => [ 1, 3, 5, 7, 9 ]
  */
 function generateOdds(len) {
-    return Array(len).fill(0).map((e, i)=>i + i + 1);
+    return Array(len).fill(0).map((e, i )=> (i + i + 1));
 }
 
 
 /**
  * Returns the doubled array - elements of the specified array are repeated twice using original order
  *
- * @param {array} arr
- * @return {array}
+ * @param {Array} arr
+ * @return {Array}
  *
  * @example
  *    ['Ace', 10, true]  => ['Ace', 10, true,   'Ace', 10, true]
@@ -63,8 +63,8 @@ function doubleArray(arr) {
 /**
  * Returns an array of positive numbers from the specified array in original order
  *
- * @param {array} arr
- * @return {array}
+ * @param {Array} arr
+ * @return {Array}
  *
  * @example
  *    [ 0, 1, 2, 3, 4, 5 ] => [ 1, 2, 3, 4, 5 ]
@@ -81,8 +81,8 @@ function integerValue(value) {
 /**
  * Returns the array with strings only in the specified array (in original order)
  *
- * @param {array} arr
- * @return {array}
+ * @param {Array} arr
+ * @return {Array}
  *
  * @example
  *    [ 0, 1, 'cat', 3, true, 'dog' ] => [ 'cat', 'dog' ]
@@ -90,7 +90,7 @@ function integerValue(value) {
  *    [ 'cat, 'dog', 'raccon' ] => [ 'cat', 'dog', 'racoon' ]
  */
 function getArrayOfStrings(arr) {
-    return arr.filter((x) => typeof x === 'string');
+    return arr.filter((x) => (typeof x === 'string'));
 }
 
 function stringValue(value) {
@@ -102,8 +102,8 @@ function stringValue(value) {
  * Falsy values: false, null, 0, "", undefined, and NaN.
  * (https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean#Description)
  *
- * @param {array} arr
- * @return {array}
+ * @param {Array} arr
+ * @return {Array}
  *
  * @example
  *    [ 0, false, 'cat', NaN, true, '' ] => [ 'cat', true ]asdF
@@ -112,7 +112,8 @@ function stringValue(value) {
  */
 function removeFalsyValues(arr) {
     //return Array.from(arr).filter(falsyValue);
-    return arr.filter(falsyValue);
+    //return arr.filter(falsyValue);
+    return arr.filter((x) => (x));
 }
 
 function falsyValue(value) {
@@ -123,8 +124,8 @@ function falsyValue(value) {
 /**
  * Returns the array of useprcase strings from the specified array
  *
- * @param {array} arr
- * @return {array}
+ * @param {Array} arr
+ * @return {Array}
  *
  * @example
  *    [ 'permanent-internship', 'glutinous-shriek', 'multiplicative-elevation' ] => [ 'PERMANENT-INTERNSHIP', 'GLUTINOUS-SHRIEK', 'MULTIPLICATIVE-ELEVATION' ]
@@ -138,21 +139,21 @@ function getUpperCaseStrings(arr) {
 /**
  * Returns the array of string lengths from the specified string array.
  *
- * @param {array} arr
- * @return {array}
+ * @param {Array} arr
+ * @return {Array}
  *
  * @example
  *    [ '', 'a', 'bc', 'def', 'ghij' ]  => [ 0, 1, 2, 3, 4 ]
  *    [ 'angular', 'react', 'ember' ] => [ 7, 5, 5 ]
  */
 function getStringsLength(arr) {
-    return arr.map((x) => x.length);
+    return arr.map((x) => (x.length));
 }
 
 /**
  * Inserts the item into specified array at specified index
  *
- * @param {array} arr
+ * @param {Array} arr
  * @param {any} item
  * @param {number} index
  *
@@ -168,7 +169,7 @@ function insertItem(arr, item, index) {
 /**
  * Returns the n first items of the specified array
  *
- * @param {array} arr
+ * @param {Array} arr
  * @param {number} n
  *
  * @example
@@ -183,7 +184,7 @@ function getHead(arr, n) {
 /**
  * Returns the n last items of the specified array
  *
- * @param {array} arr
+ * @param {Array} arr
  * @param {number} n
  *
  * @example
@@ -199,7 +200,7 @@ function getTail(arr, n) {
  * Returns CSV represebtation of two-dimentional numeric array.
  * https://en.wikipedia.org/wiki/Comma-separated_values
  *
- * @param {array} arr
+ * @param {Array} arr
  * @return {string}
  *
  * @example
@@ -216,15 +217,15 @@ function getTail(arr, n) {
  *    +'30,31,32,33,34'
  */
 function toCsvText(arr) {
-    return arr.map((x)=>x.join(',')).join('\n');
+    return arr.map((x) => (x.join(','))).join('\n');
 }
 
 /**
  * Transforms the numeric array into the according array of squares:
  *   f(x) = x * x
  *
- * @param {array} arr
- * @return {array}
+ * @param {Array} arr
+ * @return {Array}
  *
  * @example
  *   [ 0, 1, 2, 3, 4, 5 ] => [ 0, 1, 4, 9, 16, 25 ]
@@ -240,8 +241,8 @@ function toArrayOfSquares(arr) {
  *     f[n] = x[0] + x[1] + x[2] +...+ x[n]
  *  or f[n] = f[n-1] + x[n]
  *
- * @param {array} arr
- * @return {array}
+ * @param {Array} arr
+ * @return {Array}
  *
  * Example :
  *   [ 1, 1, 1, 1, 1 ]        => [ 1, 2, 3, 4, 5 ]
@@ -251,7 +252,7 @@ function toArrayOfSquares(arr) {
  */
 function getMovingSum(arr) {
     //return arr.map((x,i)=>(i===0)?(x):(x+arr[i-1]));
-    return arr.map((x, i)=>(arr.slice(0, i + 1).reduce((a, b)=>(a + b))));
+    return arr.map((x, i) => (arr.slice(0, i + 1).reduce((a, b) => (a + b))));
 }
 
 /**
@@ -274,8 +275,8 @@ function getSecondItems(arr) {
  * Propagates every item in sequence its position times
  * Returns an array that consists of: one first item, two second items, tree third items etc.
  *
- * @param {array} arr
- * @return {array}
+ * @param {Array} arr
+ * @return {Array}
  *
  * @example :
  *  [] => []
@@ -292,8 +293,8 @@ function propagateItemsByPositionIndex(arr) {
 /**
  * Returns the 3 largest numbers from the specified array
  *
- * @param {array} arr
- * @return {array}
+ * @param {Array} arr
+ * @return {Array}
  *
  * @example
  *   [] => []
@@ -312,7 +313,7 @@ function get3TopItems(arr) {
 /**
  * Returns the number of positive numbers from specified array
  *
- * @param {array} arr
+ * @param {Array} arr
  * @return {number}
  *
  * @example
@@ -322,14 +323,14 @@ function get3TopItems(arr) {
  *   [ null, 1, 'elephant' ] => 1
  */
 function getPositivesCount(arr) {
-    return arr.filter((x) => x > 0).length;
+    return arr.filter((x) => (x > 0)).length;
 }
 
 /**
  * Sorts digit names
  *
- * @param {array} arr
- * @return {array}
+ * @param {Array} arr
+ * @return {Array}
  *
  * @example
  *   [] => []
@@ -346,7 +347,7 @@ function sortDigitNamesByNumericOrder(arr) {
 /**
  * Returns the sum of all items in the specified array of numbers
  *
- * @param {array} arr
+ * @param {Array} arr
  * @return {number}
  *
  * @example
@@ -356,14 +357,14 @@ function sortDigitNamesByNumericOrder(arr) {
  *   [ 1, 10, 100, 1000 ]  => 1111
  */
 function getItemsSum(arr) {
-    return arr.reduce((a, b)=>a + b, 0);
+    return arr.reduce((a, b) => (a + b), 0);
 }
 
 /**
  * Returns the number of all falsy value in the specified array
  *
- * @param {array} arr
- * @return {array}
+ * @param {Array} arr
+ * @return {Number}
  *
  * @example
  *  [] => 0
@@ -372,7 +373,7 @@ function getItemsSum(arr) {
  *  [ null, undefined, NaN, false, 0, '' ]  => 6
  */
 function getFalsyValuesCount(arr) {
-    return arr.filter((x)=> (!x)).length;
+    return arr.filter((x) => (!x)).length;
 }
 function trueValue(value) {
     return !value
@@ -381,9 +382,9 @@ function trueValue(value) {
 /**
  * Returns a number of all occurences of the specified item in an array
  *
- * @param {array} arr
+ * @param {Array} arr
  * @param {any} item
- * @return {number}
+ * @return {Number}
  *
  * @example
  *    [ 0, 0, 1, 1, 1, 2 ], 1 => 3
@@ -393,13 +394,13 @@ function trueValue(value) {
  *    [ true, 0, 1, 'true' ], true => 1
  */
 function findAllOccurences(arr, item) {
-    return arr.filter((x)=>(x === item)).length;
+    return arr.filter((x) => (x === item)).length;
 }
 
 /**
  * Concatenates all elements from specified array into single string with ',' delimeter
  *
- * @param {array} arr
+ * @param {Array} arr
  * @return {string}
  *
  * @example
@@ -415,8 +416,8 @@ function toStringList(arr) {
 /**
  * Sorts the specified array by country name first and city name (if countries are equal) in ascending order.
  *
- * @param {array} arr
- * @return {array}
+ * @param {Array} arr
+ * @return {Array}
  *
  * @example
  *    [
@@ -459,7 +460,7 @@ function sortCitiesArray(arr) {
  *           [0,0,0,0,1]]
  */
 function getIdentityMatrix(n) {
-    return Array(n).fill(Array(n).fill(0)).map((x, i) => x.map((y, j) => (i === j) ? y = 1 : y = 0));
+    return Array(n).fill(Array(n).fill(0)).map((x, i) => (x.map((y, j) => (i === j) ? y = 1 : y = 0)));
 }
 
 /**
@@ -467,7 +468,7 @@ function getIdentityMatrix(n) {
  *
  * @param {number} start
  * @param {number} end
- * @return {array}
+ * @return {Array}
  *
  * @example
  *     1, 5  => [ 1, 2, 3, 4, 5 ]
@@ -482,8 +483,8 @@ function getIntervalArray(start, end) {
 /**
  * Returns array containing only unique values from the specified array.
  *
- * @param {array} arr
- * @return {array}
+ * @param {Array} arr
+ * @return {Array}
  *
  * @example
  *   [ 1, 2, 3, 3, 2, 1 ] => [ 1, 2, 3 ]
@@ -525,7 +526,18 @@ function distinct(arr) {
  *   }
  */
 function group(array, keySelector, valueSelector) {
-    throw new Error('Not implemented');
+    var f = function (map, curr) {
+        var key = keySelector(curr);
+        var value = valueSelector(curr);
+        if(map.has(key)) {
+            map.get(key).push(value);
+        } else {
+            map.set(key, [value]);
+        }
+        return map;
+    };
+
+    return array.reduce( f , new Map() );
 }
 
 
@@ -558,7 +570,7 @@ function selectMany(arr, childrenSelector) {
  *   [[[ 1, 2, 3]]], [ 0, 0, 1 ]      => 2        (arr[0][0][1])
  */
 function getElementByIndexes(arr, indexes) {
-    return indexes.reduce((a, b, i) => a[b], arr);
+    return indexes.reduce((a, b) => a[b], arr);
 }
 
 
@@ -568,8 +580,8 @@ function getElementByIndexes(arr, indexes) {
  * The middle element (if exists) leave on the same position.
  *
  *
- * @param {array} arr
- * @return {array}
+ * @param {Array} arr
+ * @return {Array}
  *
  * @example
  *   [ 1, 2, 3, 4, 5 ]   =>  [ 4, 5, 3, 1, 2 ]
