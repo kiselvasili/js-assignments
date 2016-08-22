@@ -18,7 +18,7 @@
  */
 function createCompassPoints() {
     throw new Error('Not implemented');
-    var sides = ['N','E','S','W'];  // use array of cardinal directions only!
+    var sides = ['N', 'E', 'S', 'W'];  // use array of cardinal directions only!
 }
 
 
@@ -56,7 +56,31 @@ function createCompassPoints() {
  *   'nothing to do' => 'nothing to do'
  */
 function* expandBraces(str) {
-    throw new Error('Not implemented');
+    let queue = [str],
+        val,
+        match,
+        arr,
+        regex = "\{([0-9a-zA-Z\.,]+)\}";
+
+    while(1) {
+        val = queue.shift();
+        match = val.match(regex);
+
+        if(match == null) {
+            queue.push(val);
+            break;
+        }
+
+        arr = match[1].split(',');
+
+        for(let i = 0; i < arr.length; i++)
+            queue.push(val.replace(match[0], arr[i]));
+    }
+
+    queue = queue.filter((x, i, queue) => queue.indexOf(x) == i);
+
+    while (queue.length)
+        yield queue.pop();
 }
 
 
@@ -88,7 +112,25 @@ function* expandBraces(str) {
  *
  */
 function getZigZagMatrix(n) {
-    throw new Error('Not implemented');
+    let resultArray = Array.from({'length': n}, () => []),
+        val = 0,
+        diagonal = 2*n - 1,
+        x;
+    for (let i = 0; i < diagonal; i++) {
+        for (let j = 0; j < n; j++) {
+            if(i % 2 === 0){
+                x = i - j;
+            }
+            else{
+                x = i - (n - j - 1);
+            }
+            if (x >= 0 && x < n){
+                resultArray[x].push(val++);
+            }
+        }
+
+    }
+    return resultArray;
 }
 
 
@@ -104,7 +146,7 @@ function getZigZagMatrix(n) {
  * @params {array} dominoes
  * @return {bool}
  *
- * @example
+ * @examplewdd
  *
  * [[0,1],  [1,1]] => true
  * [[1,1], [2,2], [1,5], [5,6], [6,3]] => false
@@ -137,13 +179,33 @@ function canDominoesMakeRow(dominoes) {
  * [ 1, 2, 4, 5]          => '1,2,4,5'
  */
 function extractRanges(nums) {
-    throw new Error('Not implemented');
+    var result = '';
+    for (var i = 0; i < nums.length - 1; i++) {
+        var j = i;
+
+        while (nums[j] === nums[j + 1] - 1)
+            j++;
+
+        if (nums[i] + 1 !== nums[i + 1] && i !== nums.length - 2){
+            result += `${ nums[i] },`;
+        }
+        else{
+            if (nums[i] + 1 === nums[i + 1] && nums[i] + 2 !== nums[i + 2]){
+                result += `${ nums[i] },${ nums[i + 1] },`;
+            }
+            else{
+                result += `${ nums[i] }-${ nums[j] },`;
+            }
+        }
+        i = j;
+    }
+    return result.slice(0, -1);
 }
 
 module.exports = {
-    createCompassPoints : createCompassPoints,
-    expandBraces : expandBraces,
-    getZigZagMatrix : getZigZagMatrix,
-    canDominoesMakeRow : canDominoesMakeRow,
-    extractRanges : extractRanges
+    createCompassPoints: createCompassPoints,
+    expandBraces: expandBraces,
+    getZigZagMatrix: getZigZagMatrix,
+    canDominoesMakeRow: canDominoesMakeRow,
+    extractRanges: extractRanges
 };

@@ -23,10 +23,9 @@
  *    [0, 1, 2, 3, 4, 5], 5    => 5
  */
 function findElement(arr, value) {
-    return arr.some(x=>x == value) ? arr.indexOf(value) : -1;
+    return arr.indexOf(value);
 }
 
-//??????
 
 /**
  * Generates an array of odd numbers of the specified length
@@ -40,7 +39,7 @@ function findElement(arr, value) {
  *    5 => [ 1, 3, 5, 7, 9 ]
  */
 function generateOdds(len) {
-    return Array(len).fill(0).map((e, i )=> (i + i + 1));
+    return Array(len).fill(0).map((e, i)=> (i + i + 1));
 }
 
 
@@ -75,9 +74,7 @@ function getArrayOfPositives(arr) {
     return arr.filter((x) => (x > 0));
 }
 
-function integerValue(value) {
-    return value > 0;
-}
+
 /**
  * Returns the array with strings only in the specified array (in original order)
  *
@@ -93,9 +90,6 @@ function getArrayOfStrings(arr) {
     return arr.filter((x) => (typeof x === 'string'));
 }
 
-function stringValue(value) {
-    return typeof value == "string";
-}
 
 /**
  * Removes falsy values from the specified array
@@ -111,15 +105,9 @@ function stringValue(value) {
  *    [ false, 0, NaN, '', undefined ]   => [ ]
  */
 function removeFalsyValues(arr) {
-    //return Array.from(arr).filter(falsyValue);
-    //return arr.filter(falsyValue);
     return arr.filter((x) => (x));
 }
 
-function falsyValue(value) {
-    //var t = new Boolean(value)
-    return !!value;
-}
 
 /**
  * Returns the array of useprcase strings from the specified array
@@ -162,7 +150,6 @@ function getStringsLength(arr) {
  *    [ 1, 'b', 'c'], 0, 'x'  => [ 'x', 1, 'b', 'c' ]
  */
 function insertItem(arr, item, index) {
-    //throw new Error('Not implemented');
     return arr.splice(index, 0, item);
 }
 
@@ -251,7 +238,6 @@ function toArrayOfSquares(arr) {
  *   [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ] => [ 1, 3, 6, 10, 15, 21, 28, 36, 45, 55 ]
  */
 function getMovingSum(arr) {
-    //return arr.map((x,i)=>(i===0)?(x):(x+arr[i-1]));
     return arr.map((x, i) => (arr.slice(0, i + 1).reduce((a, b) => (a + b))));
 }
 
@@ -267,7 +253,7 @@ function getMovingSum(arr) {
  * [ "a" ] => []
  */
 function getSecondItems(arr) {
-    return arr.filter((x, i) => (i % 2 != 0));
+    return arr.filter((x, i) => (i % 2));
 }
 
 
@@ -304,8 +290,6 @@ function propagateItemsByPositionIndex(arr) {
  *   [ 10, 10, 10, 10 ] => [ 10, 10, 10 ]
  */
 function get3TopItems(arr) {
-    //var leng=arr.length;
-    //return leng>3 ? arr.slice(leng-3,leng).reverse() : arr.reverse();
     return arr.slice(-3).reverse();
 }
 
@@ -375,9 +359,7 @@ function getItemsSum(arr) {
 function getFalsyValuesCount(arr) {
     return arr.filter((x) => (!x)).length;
 }
-function trueValue(value) {
-    return !value
-}
+
 
 /**
  * Returns a number of all occurences of the specified item in an array
@@ -529,7 +511,7 @@ function group(array, keySelector, valueSelector) {
     var f = function (map, curr) {
         var key = keySelector(curr);
         var value = valueSelector(curr);
-        if(map.has(key)) {
+        if (map.has(key)) {
             map.get(key).push(value);
         } else {
             map.set(key, [value]);
@@ -537,7 +519,7 @@ function group(array, keySelector, valueSelector) {
         return map;
     };
 
-    return array.reduce( f , new Map() );
+    return array.reduce(f, new Map());
 }
 
 
@@ -595,7 +577,9 @@ function getElementByIndexes(arr, indexes) {
 function swapHeadAndTail(arr) {
     return arr.length % 2 === 0 ?
         arr.slice(arr.length / 2, arr.length).concat(arr.slice(0, arr.length / 2)) :
-        arr.slice(Math.ceil(arr.length / 2), arr.length).concat(arr.slice(Math.ceil(arr.length / 2) - 1, Math.ceil(arr.length / 2))).concat(arr.slice(0, arr.length / 2));
+        arr.slice(Math.ceil(arr.length / 2), arr.length)
+            .concat(arr.slice(Math.ceil(arr.length / 2) - 1, Math.ceil(arr.length / 2)))
+            .concat(arr.slice(0, arr.length / 2));
 }
 
 

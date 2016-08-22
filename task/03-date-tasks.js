@@ -37,7 +37,7 @@ function parseDataFromRfc2822(value) {
  *    '2016-01-19T08:07:37Z' => Date()
  */
 function parseDataFromIso8601(value) {
-    return new Date(Date.parse(value));
+    return Date.parse(value);
 }
 
 

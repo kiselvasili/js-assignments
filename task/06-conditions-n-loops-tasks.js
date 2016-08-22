@@ -140,7 +140,10 @@ function isTriangle(a, b, c) {
  *
  */
 function doRectanglesOverlap(rect1, rect2) {
-    throw new Error('Not implemented');
+    return rect1.top + rect1.height > rect2.top
+        && rect1.left + rect1.width > rect2.left
+        && rect2.top + rect2.height > rect1.top
+        && rect2.left + rect2.width > rect1.left;
 }
 function rectangleOverlap() {
 
@@ -364,7 +367,7 @@ function isBracketsBalanced(str) {
         return true;
     }
     while (flag) {
-        str = str.replace('[]', '').replace('()', '').replace('{}', '').replace('<>', '');
+        str = str.replace(/<>|\[\]|\{\}|\(\)/, '');
         if (lengthStart > str.length) {
             if (str.length === 0) {
                 return flag;
@@ -410,7 +413,43 @@ function isBracketsBalanced(str) {
  *
  */
 function timespanToHumanString(startDate, endDate) {
-    throw new Error('Not implemented');
+    const min = 60;
+    const hour = 60 * min;
+    const day = 24 * hour;
+    const month = 30 * day;
+    const year = 12 * month;
+    const diff = (endDate - startDate) / 1000;
+    if (diff <= 45){
+        return 'a few seconds ago';
+    }
+    if (diff <= 90){
+        return 'a minute ago';
+    }
+    if (diff <= 45 * min){
+        return `${Math.round((diff - 0.001) / min)} minutes ago`;
+    }
+    if (diff <= 90 * min){
+        return 'an hour ago';
+    }
+    if (diff <= 22 * hour){
+        return `${Math.round((diff - 0.001) / hour)} hours ago`;
+    }
+    if (diff <= 36 * hour){
+        return 'a day ago';
+    }
+    if (diff <= 25 * day){
+        return `${Math.round((diff - 0.001) / day)} days ago`;
+    }
+    if (diff <= 45 * day){
+        return 'a month ago';
+    }
+    if (diff <= 345 * day){
+        return `${Math.round((diff - 0.001) / month)} months ago`;
+    }
+    if (diff <= 545 * day){
+        return 'an year ago';
+    }
+    return `${Math.round((diff - 0.001) / year)} years ago`;
 }
 
 
@@ -543,7 +582,23 @@ function getMatrixProduct(m1, m2) {
  *
  */
 function evaluateTicTacToePosition(position) {
-    throw new Error('Not implemented');
+    function Comb(x1, x2, x3) {
+        return x1 === x2 && x2 === x3 && x1 != undefined;
+    }
+    for(let i=0; i<3;i++) {
+        if (Comb(position[i][0],position[i][1],position[i][2])){
+            return position[i][0];
+        }
+        if (Comb(position[0][i],position[1][i],position[2][i])){
+            return position[0][i];
+        }
+        if (Comb(position[0][0],position[1][1],position[2][2])){
+            return position[0][0];
+        }
+        if (Comb(position[0][2],position[1][1],position[2][0])){
+            return position[0][2];
+        }
+    }
 }
 
 

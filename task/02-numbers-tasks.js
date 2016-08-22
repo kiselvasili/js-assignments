@@ -73,13 +73,7 @@ function getAverage(value1, value2) {
  *   (-5,0) (10,-10) => 18.027756377319946
  */
 function getDistanceBetweenPoints(x1, y1, x2, y2) {
-    function katetLength(x1, x2) {
-        return ((x1 > 0 && x2 < 0) || (x1 < 0 && x2 > 0)) ? Math.abs(x1) + Math.abs(x2) : Math.abs(x1) - Math.abs(x2);
-    }
-
-    var a = katetLength(x1, x2);
-    var b = katetLength(y1, y2);
-    return Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2));
+    return Math.hypot(x2 - x1, y2 - y1);
 }
 
 /**
@@ -95,17 +89,7 @@ function getDistanceBetweenPoints(x1, y1, x2, y2) {
  *   5*x = 0         => 0
  */
 function getLinearEquationRoot(a, b) {
-    if (Math.abs(a) == 0 || Math.abs(b) == 0) {
-        return 0;
-    }
-    if (Math.abs(a) >= Math.abs(b)) {
-        return -a / b;
-    }
-    else {
-        if (Math.abs(a) <= Math.abs(b)) {
-            return -b / a
-        }
-    }
+    return -b / a;
 }
 
 
@@ -202,9 +186,8 @@ function getParallelipidedDiagonal(a, b, c) {
  *   1678, 3  => 2000
  */
 function roundToPowerOfTen(num, pow) {
-    var power = Math.pow(10, pow);
-    var fraction = num / power;
-    return (((fraction % 1) * 10 >= 5) ? Math.ceil(fraction) : Math.floor(fraction)) * power;
+    var m = Math.pow(10, pow);
+    return Math.round(num/m)*m;
 }
 
 /**
@@ -251,21 +234,6 @@ function isPrime(n) {
  */
 function toNumber(value, def) {
     return +value || def;
-    /*var result=value;
-     if(Number(value)>0){
-     return Number(value);
-     }
-     if (result instanceof Number)
-     {
-     return Number(result);
-     }
-     if ((typeof value)==typeof 12)
-     {
-     return parseFloat(value);
-     }
-     else {
-     return parseFloat(def);
-     }*/
 }
 
 module.exports = {

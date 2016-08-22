@@ -23,21 +23,6 @@
  *    console.log(r.getArea());   // => 200
  */
 function Rectangle(width, height) {
-    /*var Rectangle=function(width,height){
-     this.width=width;
-     this.height=height;
-     this.getArea=function(){
-     return width*height;
-     }
-     }
-     return new Rectangle(width,height);*/
-    /*return {
-     width,
-     height,
-     getArea: function (){
-     return this.width*this.height
-     }
-     };*/
     this.width = width;
     this.height = height;
 
@@ -151,7 +136,6 @@ const cssSelectorBuilder = {
     },
 
     id: function(value) {
-        //throw new Error('Not implemented');
         var numSelf = 2;
         if(this.hasOwnProperty('isId')) {
             throw this.err_1;
@@ -166,7 +150,6 @@ const cssSelectorBuilder = {
     },
 
     class: function(value) {
-        //throw new Error('Not implemented');
         var numSelf = 3;
         if(this.num > numSelf) {
             throw this.err_2;
@@ -178,7 +161,6 @@ const cssSelectorBuilder = {
     },
 
     attr: function(value) {
-        //throw new Error('Not implemented');
         var numSelf = 4;
         if(this.num > numSelf) {
             throw this.err_2;
@@ -190,7 +172,6 @@ const cssSelectorBuilder = {
     },
 
     pseudoClass: function(value) {
-        //throw new Error('Not implemented');
         var numSelf = 5;
         if(this.num > numSelf) {
             throw this.err_2;
@@ -202,7 +183,6 @@ const cssSelectorBuilder = {
     },
 
     pseudoElement: function(value) {
-        //throw new Error('Not implemented');
         if(this.hasOwnProperty('isPsEl')) {
             throw this.err_1;
         }
@@ -217,7 +197,6 @@ const cssSelectorBuilder = {
     },
 
     combine: function(selector1, combinator, selector2) {
-        // throw new Error('Not implemented');
         var s = { res: `${selector1.res} ${combinator} ${selector2.res}` };
         s.__proto__ = this;
         return s;
