@@ -43,10 +43,12 @@ describe('12-katas-3-tasks', function() {
             },{
                 chars:    'ab',
                 expected: [ 'ab', 'ba' ]
-            },{
+            }
+            ,{
                 chars:    'abc',
                 expected: [ 'abc', 'acb', 'bac', 'bca', 'cab', 'cba' ]
-            },{
+            }
+            ,{
                 chars:    'abcd',
                 expected: [ 
                     'abcd', 'abdc', 'acbd', 'acdb', 'adbc', 'adcb', 
