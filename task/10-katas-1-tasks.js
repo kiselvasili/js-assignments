@@ -17,8 +17,35 @@
  *  ]
  */
 function createCompassPoints() {
-    throw new Error('Not implemented');
-    var sides = ['N', 'E', 'S', 'W'];  // use array of cardinal directions only!
+    let sides = ['N', 'E', 'S', 'W'];  // use array of cardinal directions only!
+    let result = [];
+    for (let i = 0; i < sides.length; i++) {
+        result[i * 8] = sides[i];
+        if (i === sides.length - 1) {
+            fourthAzimut(i, -1);
+        }
+        else {
+            fourthAzimut(i, i);
+        }
+    }
+    function halfAzimuth(a, b, i) {
+        return i % 2 ? b + a : a + b;
+    }
+    function fourthAzimut(i, z) {
+        result[i * 8 + 4] = halfAzimuth(sides[i], sides[z + 1], i);
+        result[i * 8 + 2] = sides[i] + result[i * 8 + 4];
+        result[i * 8 + 6] = sides[z + 1] + result[i * 8 + 4];
+        result[i * 8 + 1] = `${sides[i]}b${sides[z + 1]}`;
+        result[i * 8 + 7] = `${sides[z + 1]}b${sides[i]}`;
+        result[i * 8 + 3] = `${result[i * 8 + 4]}b${sides[i]}`;
+        result[i * 8 + 5] = `${result[i * 8 + 4]}b${sides[z + 1]}`;
+    }
+    return result.map((x, i)=> {
+        return {
+            abbreviation: x,
+            azimuth: i * 11.25
+        }
+    })
 }
 
 
@@ -62,18 +89,18 @@ function* expandBraces(str) {
         arr,
         regex = "\{([0-9a-zA-Z\.,]+)\}";
 
-    while(1) {
+    while (1) {
         val = queue.shift();
         match = val.match(regex);
 
-        if(match == null) {
+        if (match == null) {
             queue.push(val);
             break;
         }
 
         arr = match[1].split(',');
 
-        for(let i = 0; i < arr.length; i++)
+        for (let i = 0; i < arr.length; i++)
             queue.push(val.replace(match[0], arr[i]));
     }
 
@@ -114,17 +141,17 @@ function* expandBraces(str) {
 function getZigZagMatrix(n) {
     let resultArray = Array.from({'length': n}, () => []),
         val = 0,
-        diagonal = 2*n - 1,
+        diagonal = 2 * n - 1,
         x;
     for (let i = 0; i < diagonal; i++) {
         for (let j = 0; j < n; j++) {
-            if(i % 2 === 0){
+            if (i % 2 === 0) {
                 x = i - j;
             }
-            else{
+            else {
                 x = i - (n - j - 1);
             }
-            if (x >= 0 && x < n){
+            if (x >= 0 && x < n) {
                 resultArray[x].push(val++);
             }
         }
@@ -186,14 +213,14 @@ function extractRanges(nums) {
         while (nums[j] === nums[j + 1] - 1)
             j++;
 
-        if (nums[i] + 1 !== nums[i + 1] && i !== nums.length - 2){
+        if (nums[i] + 1 !== nums[i + 1] && i !== nums.length - 2) {
             result += `${ nums[i] },`;
         }
-        else{
-            if (nums[i] + 1 === nums[i + 1] && nums[i] + 2 !== nums[i + 2]){
+        else {
+            if (nums[i] + 1 === nums[i + 1] && nums[i] + 2 !== nums[i + 2]) {
                 result += `${ nums[i] },${ nums[i + 1] },`;
             }
-            else{
+            else {
                 result += `${ nums[i] }-${ nums[j] },`;
             }
         }

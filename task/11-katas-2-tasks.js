@@ -176,7 +176,44 @@ function getPokerHandRank(hand) {
  *    '+-------------+\n'
  */
 function* getFigureRectangles(figure) {
-   throw new Error('Not implemented');
+    var lines = figure.split('\n');
+    while(lines.length > 2) {
+        let buf = lines.shift(),
+            high = buf.lastIndexOf('+'),
+            counter1 = 0;
+        while (counter1 < high) {
+            let z = -1;
+            do {
+                z = buf.indexOf('+', counter1);
+                var con1 = lines[0][z],
+                    flag = (con1 !== '+') && (con1 !== '|');
+                counter1 = z + 1;
+            } while(flag);
+            if(z === -1) {
+                break;
+            }
+            var c = z;
+            do {
+                counter1 = buf.indexOf('+',c + 1);
+                var con2 = lines[0][counter1];
+                var flag = (con2 !== '+') && (con2 !== '|');
+                c = counter1;
+            } while(flag && (counter1 !== -1));
+            if(counter1 === -1) {
+                break
+            }
+            var b = counter1 - z + 1;
+            var h = lines.findIndex(x => x[z] === '+' && x[counter1] === '+') + 2;
+
+            yield Figure(b, h);
+        }
+    }
+
+    function Figure(w, h) {
+        var line = `+${'-'.repeat(w - 2)}+\n`,
+            result = (`|${' '.repeat(w - 2)}|\n`).repeat(h - 2);
+        return line + result + line;
+    }
 }
 
 

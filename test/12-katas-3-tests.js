@@ -50,10 +50,10 @@ describe('12-katas-3-tasks', function() {
             }
             ,{
                 chars:    'abcd',
-                expected: [ 
-                    'abcd', 'abdc', 'acbd', 'acdb', 'adbc', 'adcb', 
-                    'bacd', 'badc', 'bdac', 'bdca', 'bcad', 'bcda', 
-                    'cabd', 'cadb', 'cbad', 'cbda', 'cdab', 'cdba', 
+                expected: [
+                    'abcd', 'abdc', 'acbd', 'acdb', 'adbc', 'adcb',
+                    'bacd', 'badc', 'bcad', 'bcda', 'bdac', 'bdca',
+                    'cabd', 'cadb', 'cbad', 'cbda', 'cdab', 'cdba',
                     'dabc', 'dacb', 'dbac', 'dbca', 'dcab', 'dcba'
                 ]
             }

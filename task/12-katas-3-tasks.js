@@ -61,9 +61,9 @@ function* getPermutations(chars) {
         }
         return permArr
     }
-    var t=permute(chars.split(''));
-    for(var i=0;i<t.length;i++){
-        yield t[i];
+    var results=permute(chars.split(''));
+    for(var i=0;i<results.length;i++){
+        yield results[i];
     }
 }
 
