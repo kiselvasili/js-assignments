@@ -138,10 +138,85 @@ const PokerRank = {
     TwoPairs: 2,
     OnePair: 1,
     HighCard: 0
-}
+};
 
 function getPokerHandRank(hand) {
-    throw new Error('Not implemented');
+    var cards={'02':0,'03':1,'04':2,'05':3,'06':4,'07':5,'08':6,'09':7,'10':8,'0J':9,'0Q':10,'0K':11,'0A':12};
+
+    function info(hand){
+
+        var count=1;
+        var u=[];
+        var suitCount=1;
+        var row;
+        var combo;
+        var hand =hand.map(x=>(x[0]!=1?'0'+x:x)).sort((a,b)=>(cards[a[0]+a[1]]>cards[b[0]+b[1]]));
+        console.log(hand);
+
+        if ((hand[4].slice(0,2)==='0A' && hand[0].slice(0,2)==='02' && cards[hand[3].slice(0,2)]-cards[hand[0].slice(0,2)]===3) ||
+            ((cards[hand[4][0]+hand[4][1]]-cards[hand[0][0]+hand[0][1]])===4)) {
+            row=true;
+        }
+        else{
+            row=false;
+        }
+
+        hand.reduce((a,b,i)=>{
+            if(a[0]+a[1]===b[0]+b[1]){
+                count++
+            }
+            else{
+                u.push(count);
+                count=1;
+            }
+            if(i===4){
+                u.push(count)
+            }
+            if (a[2]===b[2]){
+                suitCount++
+            }
+            return b;
+
+        });
+        combo=u.sort().join('');
+
+        if(row && suitCount===5 && combo=='11111'){
+            return PokerRank.StraightFlush;
+        }else{
+            if(suitCount!==5 && combo=='14'){
+                return PokerRank.FourOfKind;
+            }else {
+                if(suitCount!==5 && combo=='23'){
+                    return PokerRank.FullHouse;
+                }else {
+                    if(!row && suitCount===5 && combo=='11111'){
+                        return PokerRank.Flush;
+                    }else {
+                        if(row && suitCount!==5 && combo=='11111'){
+                            return PokerRank.Straight;
+                        }else {
+                            if(suitCount!==5 && combo=='113'){
+                                return PokerRank.ThreeOfKind;
+                            }else {
+                                if(suitCount!==5 && combo=='122'){
+                                    return PokerRank.TwoPairs;
+                                }else {
+                                    if(suitCount!==5 && combo=='1112'){
+                                        return PokerRank.OnePair;
+                                    }else {
+                                        if(!row && suitCount!==5 && combo=='11111'){
+                                            return PokerRank.HighCard;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    return info(hand);
 }
 
 

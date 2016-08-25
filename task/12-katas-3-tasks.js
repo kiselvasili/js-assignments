@@ -27,6 +27,69 @@
  *   'NULL'      => false
  */
 function findStringInSnakingPuzzle(puzzle, searchStr) {
+    //var counter=1;
+    var globalArr = [];
+
+    function findAllLetter(puzzle, letter) {
+        var lettersArr = [];
+
+        for (let i = 0; i < puzzle.length; i++) {
+            for (let j = 0; j < puzzle[i].length; j++) {
+                if (puzzle[i][j] == letter) {
+                    //console.log(`i=${i}  j=${j}`);
+                    lettersArr.push({
+                        'i': i,
+                        'j': j
+                    })
+                }
+            }
+        }
+        return lettersArr;
+    }
+
+    var firstLetterArray = findAllLetter(puzzle, searchStr[0]);
+    //console.log('hello vasili');
+
+    /*for (let i=0;i<firstLetterArray.length;i++){
+     for (let j=1;j<searchStr.length;j++){
+     findAllLetter(puzzle,searchStr[j]);
+
+     }
+     }*/
+
+    for (let i = 0; i < firstLetterArray.length; i++) {
+        let counter = 1;
+        if (snakeMethod(firstLetterArray[i], findAllLetter(puzzle, searchStr[1]), counter)) {
+            //return true;
+        }
+    }
+
+    function snakeMethod(letter, nextLetterArr, finalCounter) {
+        for (let i = 0; i < nextLetterArr.length; i++) {
+            //console.log(`letter=${puzzle[letter.i][letter.j]}  next letter=${puzzle[nextLetterArr[i].i][nextLetterArr[i].j]}`);
+            if ((letter.i == nextLetterArr[i].i && letter.j == nextLetterArr[i].j + 1) ||
+                (letter.i == nextLetterArr[i].i && letter.j == nextLetterArr[i].j - 1) ||
+                (letter.i == nextLetterArr[i].i + 1 && letter.j == nextLetterArr[i].j) ||
+                (letter.i == nextLetterArr[i].i - 1 && letter.j == nextLetterArr[i].j)) {
+                globalArr.push(puzzle[nextLetterArr[i].i][nextLetterArr[i].j]);
+
+                finalCounter++;
+
+                if (finalCounter == searchStr.length) {
+                    return true;
+                }
+
+                //console.log(`counter=${finalCounter}`);
+                if (snakeMethod(nextLetterArr[i], findAllLetter(puzzle, searchStr[finalCounter]), finalCounter)) {
+                    //return true;
+                }
+            }
+
+        }
+    }
+
+
+    //return false;
     throw new Error('Not implemented');
 }
 
@@ -61,8 +124,9 @@ function* getPermutations(chars) {
         }
         return permArr
     }
-    var results=permute(chars.split(''));
-    for(var i=0;i<results.length;i++){
+
+    var results = permute(chars.split(''));
+    for (var i = 0; i < results.length; i++) {
         yield results[i];
     }
 }
@@ -113,15 +177,25 @@ function UrlShortener() {
 }
 
 UrlShortener.prototype = {
-
     encode: function (url) {
-        throw new Error('Not implemented');
+        let result = '';
+        for (let i = 0; i < url.length; i += 2) {
+            result += String.fromCharCode((url.charCodeAt(i) << 8) | url.charCodeAt(i + 1));
+        }
+        return result;
     },
 
     decode: function (code) {
-        throw new Error('Not implemented');
+        let result = '';
+        for (let i = 0; i < code.length; i++) {
+            let char = parseInt(code.charCodeAt(i), 10),
+                b = char & 255,
+                a = (char >> 8) & 255;
+            result += !b ? String.fromCharCode(a) : String.fromCharCode(a) + String.fromCharCode(b);
+        }
+        return result;
     }
-}
+};
 
 
 module.exports = {
