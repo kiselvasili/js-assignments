@@ -27,16 +27,25 @@
  *   'NULL'      => false
  */
 function findStringInSnakingPuzzle(puzzle, searchStr) {
-    //var counter=1;
-    var globalArr = [];
+    let height = puzzle.length,
+        width = puzzle[0].length,
+        repeatedLetters = Array.from({length: width}, () => new Array(height).fill(false));
+
+    function checking(a, b) {
+        if ((a.i == b.i && a.j == b.j + 1) ||
+            (a.i == b.i && a.j == b.j - 1) ||
+            (a.i == b.i + 1 && a.j == b.j) ||
+            (a.i == b.i - 1 && a.j == b.j)) {
+            return true;
+        }
+    }
 
     function findAllLetter(puzzle, letter) {
-        var lettersArr = [];
+        let lettersArr = [];
 
         for (let i = 0; i < puzzle.length; i++) {
             for (let j = 0; j < puzzle[i].length; j++) {
                 if (puzzle[i][j] == letter) {
-                    //console.log(`i=${i}  j=${j}`);
                     lettersArr.push({
                         'i': i,
                         'j': j
@@ -47,50 +56,44 @@ function findStringInSnakingPuzzle(puzzle, searchStr) {
         return lettersArr;
     }
 
-    var firstLetterArray = findAllLetter(puzzle, searchStr[0]);
-    //console.log('hello vasili');
-
-    /*for (let i=0;i<firstLetterArray.length;i++){
-     for (let j=1;j<searchStr.length;j++){
-     findAllLetter(puzzle,searchStr[j]);
-
-     }
-     }*/
+    let firstLetterArray = findAllLetter(puzzle, searchStr[0]);
 
     for (let i = 0; i < firstLetterArray.length; i++) {
         let counter = 1;
+        repeatedLetters[firstLetterArray[i].i][firstLetterArray[i].j] = true;
         if (snakeMethod(firstLetterArray[i], findAllLetter(puzzle, searchStr[1]), counter)) {
-            //return true;
+            return true;
+        }
+        else {
+            repeatedLetters[firstLetterArray[i].i][firstLetterArray[i].j] = false;
         }
     }
 
     function snakeMethod(letter, nextLetterArr, finalCounter) {
+        let count = finalCounter;
+
         for (let i = 0; i < nextLetterArr.length; i++) {
-            //console.log(`letter=${puzzle[letter.i][letter.j]}  next letter=${puzzle[nextLetterArr[i].i][nextLetterArr[i].j]}`);
-            if ((letter.i == nextLetterArr[i].i && letter.j == nextLetterArr[i].j + 1) ||
-                (letter.i == nextLetterArr[i].i && letter.j == nextLetterArr[i].j - 1) ||
-                (letter.i == nextLetterArr[i].i + 1 && letter.j == nextLetterArr[i].j) ||
-                (letter.i == nextLetterArr[i].i - 1 && letter.j == nextLetterArr[i].j)) {
-                globalArr.push(puzzle[nextLetterArr[i].i][nextLetterArr[i].j]);
 
-                finalCounter++;
+            if (checking(letter, nextLetterArr[i]) && !repeatedLetters[nextLetterArr[i].i][nextLetterArr[i].j]) {
 
-                if (finalCounter == searchStr.length) {
+                count++;
+
+                repeatedLetters[nextLetterArr[i].i][nextLetterArr[i].j] = true;
+
+                if (count == searchStr.length) {
                     return true;
                 }
 
-                //console.log(`counter=${finalCounter}`);
-                if (snakeMethod(nextLetterArr[i], findAllLetter(puzzle, searchStr[finalCounter]), finalCounter)) {
-                    //return true;
+                if (snakeMethod(nextLetterArr[i], findAllLetter(puzzle, searchStr[count]), count)) {
+                    return true;
+                }
+                else {
+                    count--;
+                    repeatedLetters[nextLetterArr[i].i][nextLetterArr[i].j] = false;
                 }
             }
-
         }
     }
-
-
-    //return false;
-    throw new Error('Not implemented');
 }
 
 
