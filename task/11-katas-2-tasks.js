@@ -145,12 +145,12 @@ function getPokerHandRank(hand) {
 
     function info(hand){
 
-        var count=1;
-        var u=[];
-        var suitCount=1;
-        var row;
-        var combo;
-        var hand =hand.map(x=>(x[0]!=1?'0'+x:x)).sort((a,b)=>(cards[a[0]+a[1]]>cards[b[0]+b[1]]));
+        let count=1,
+            u=[],
+            suitCount=1,
+            row,
+            combo;
+        hand =hand.map(x=>(x[0]!=1?'0'+x:x)).sort((a,b)=>(cards[a[0]+a[1]]>cards[b[0]+b[1]]));
         if ((hand[4].slice(0,2)==='0A' && hand[0].slice(0,2)==='02' && cards[hand[3].slice(0,2)]-cards[hand[0].slice(0,2)]===3) ||
             ((cards[hand[4][0]+hand[4][1]]-cards[hand[0][0]+hand[0][1]])===4)) {
             row=true;

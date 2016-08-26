@@ -182,7 +182,44 @@ function getZigZagMatrix(n) {
  *
  */
 function canDominoesMakeRow(dominoes) {
-    throw new Error('Not implemented');
+    let doubleBone=[],
+        arr=dominoes.filter((x)=>{
+        if(x[0]===x[1]){
+            doubleBone.push(x[0]);
+        }
+        else {
+            return x;
+        }
+    });
+    let count=0;
+    arr=arr.join().split(',').sort();
+    doubleBone.forEach((x)=>{
+        if(arr.some(z=>(z==x))){
+            count++;
+        }
+
+    });
+    if(count!=doubleBone.length){
+
+        return false;
+    }
+    let count2=1,
+        oddCount=0;
+    for (let i=0;i<arr.length-1;i++){
+        if(arr[i]===arr[i+1]){
+            count2++
+        }
+        else {
+            if(count2%2!=0){
+                oddCount++;
+                count2=1;
+            }
+            else{
+                count2=1;
+            }
+        }
+    }
+    return oddCount<3;
 }
 
 
